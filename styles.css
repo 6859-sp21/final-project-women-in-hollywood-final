@@ -208,3 +208,89 @@ p {
 li{
   list-style-type: none;
 }
+
+rect.bg{
+  opacity: 0;
+}
+
+.area {
+  opacity: 0.2;
+}
+
+.axis line {
+  fill: none;
+  stroke: #999;
+  shape-rendering: crispEdges;
+}
+line{
+  fill: none;
+  stroke-width: 3px;
+}
+path.line{
+  fill: none;
+  stroke-width: 1.5px;
+  transition: 0.1s;
+}
+
+.Horror .line {
+  stroke: darkred;
+}
+.Horror .area, .Horror circle, .Horror .label {
+  fill: darkred;
+}
+
+.Drama .line {
+  stroke: red;
+}
+.Drama .area, .Drama circle, .Drama .label {
+  fill: red;
+}
+
+.Comedy .line {
+  stroke: orange;
+}
+.Comedy .area, .Comedy circle, .Comedy .label {
+  fill: orange;
+}
+
+.Sci-Fi .line {
+  stroke: slategrey;
+}
+.Sci-Fi .area, .Sci-Fi circle, .Sci-Fi .label {
+  fill: slategrey;
+}
+
+.Fantasy .line {
+  stroke: indigo;
+}
+.Fantasy .area, .Fantasy circle, .Fantasy .label {
+  fill: indigo;
+}
+
+.Historical .line {
+  stroke: brown;
+}
+.Historical .area, .Historical circle, .Historical .label {
+  fill: brown;
+}
+
+.Romance .line {
+  stroke: palevioletred;
+}
+.Romance .area, .Romance circle, .Romance .label {
+  fill: palevioletred;
+}
+
+.Action .line {
+  stroke: blue;
+}
+.Action .area, .Action circle, .Action .label {
+  fill: blue;
+}
+
+.Thriller .line {
+  stroke: darkolivegreen;
+}
+.Thriller .area, .Thriller circle, .Thriller .label {
+  fill: darkolivegreen;
+}
