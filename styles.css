@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: aliceblue;
+    text-align: center;
+    padding: 50 10;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.two-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.selected {
+    opacity: 1 !important;
+    stroke: black;
+    stroke-width: 1px;
+}
+
+.button_group {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+.legend_button {
+    padding: 5 10;
+    border-radius: 5px;
+    background-color: darkblue;
+    color: white;
+    border-style: none;
+    border-color: none;
+    opacity: 0.5;
+    margin: 2px;
+}
+
+
+.legend_button:hover {
+    opacity: 1;
+}
+
+.bubbles {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#bubble_legend {
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+.tooltip { 
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: black;
+    background-color: lightgray;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+::selection{
+  color: #fff;
+  background: #664AFF;
+}
+
+.wrapper{
+  max-width: 450px;
+  margin: 150px auto;
+}
+
+.wrapper .search-input{
+  background: #fff;
+  width: 50%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+}
+
+.search-input input{
+  height: 55px;
+  width: 50%;
+  text-align: center;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+.search-input.active input{
+  border-radius: 5px 5px 0 0;
+}
+
+.autocom-box {
+  border-bottom: 1px lightgray solid;
+  border-right: 1px lightgray solid;
+  border-left: 1px lightgray solid;
+  border-radius: 10px;
+}
+
+.search-input .autocom-box{
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 280px;
+  overflow-y: auto;
+  width: 50%;
+}
+
+.search-input.active .autocom-box{
+  padding: 10px 8px;
+  opacity: 1;
+  pointer-events: auto;
+  
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.autocom-box li{
+  list-style: none;
+  padding: 8px 12px;
+  display: none;
+  cursor: default;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.search-input.active .autocom-box li{
+  display: block;
+  text-align: center;
+}
+.autocom-box li:hover{
+  background: #efefef;
+}
+
+.search-input .icon{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  line-height: 55px;
+  font-size: 20px;
+  color: #644bff;
+  cursor: pointer;
+}
+
+.movie_result {
+    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30em;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 20px;
+    
+}
+.hidden {
+    display: none;
+}
+
+.PASS {
+    color: #71c788;
+    padding-bottom: 8px;
+}
+.FAIL {
+    color: #db8181;
+    padding-bottom: 8px;
+}
+
+.legend_caption {
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
+#resetButton {
+  padding: 2px 4px;
+  margin-top: 12px;
+}
+
+p {
+  margin-bottom:12px;
+}
+
+
+li{
+  list-style-type: none;
+}
