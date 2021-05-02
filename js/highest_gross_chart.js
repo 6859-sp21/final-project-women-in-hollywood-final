@@ -1,9 +1,9 @@
 // stacked bar chart for highest grossing movies
-var width = 800;
-var height = 960;
+var width = 750;
+var height = 550;
 var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
     .attr("width", width)
-    .attr("height", "100%")
+    .attr("height", height)
     .classed('stacked_bars_svg', true);
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
@@ -14,7 +14,7 @@ g = stacked_bars_svg.append("g")
 
 
 var y = d3.scaleBand()			// x = d3.scaleBand()	
-.rangeRound([0, height])	// .rangeRound([0, width])
+.rangeRound([0, 500])	// .rangeRound([0, width])
 .paddingInner(0.15)
 .align(0.1);
 
@@ -22,7 +22,7 @@ var x = d3.scaleLinear()		// y = d3.scaleLinear()
 .rangeRound([0, width]);	// .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#99382b", "#ba6f65", "#db8181", "#71c788"]);
+.range(["#99382b", "#ba6f65", "#db8181", "black"]);
 
 let all_movies_data;
 d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/all_movies.json", d3.autotype).then(
@@ -37,12 +37,12 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         movie_names = all_movies_data.map(m => m.title);  
         var keys = ['0', '1', '2', '3'];
         // console.log(keys , "keys");
-        let past_thirty_years = [];
-        for (i = 2019; i>=2000; i--) {
-            past_thirty_years.push(i);
+        let past_twenty_years = [];
+        for (i = 2019; i>=1999; i--) {
+            past_twenty_years.push(i);
         }
 
-        chart_data = past_thirty_years.map(year => {
+        chart_data = past_twenty_years.map(year => {
             num_passed_0 = 0;
             num_passed_1 = 0;
             num_passed_2 = 0;
@@ -79,9 +79,9 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             }
         }
         );
-        console.log(chart_data, "chart data");
+        // console.log(chart_data, "chart data");
 
-        y.domain(past_thirty_years);					// x.domain...
+        y.domain(past_twenty_years);					// x.domain...
         x.domain([0, 10]).nice();	// y.domain...
         z.domain(keys);
 
@@ -112,7 +112,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
 
         g.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0,"+height+")")				
+            .attr("transform", "translate(0,"+(height-50)+")")				
             .call(d3.axisBottom(x).ticks(null, "s"))				
         .append("text")
             .attr("y", 2)											

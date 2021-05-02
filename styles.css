@@ -7,9 +7,10 @@
 }
 
 body {
-    background-color: aliceblue;
+    background-color: black;
     text-align: center;
     padding: 50 10;
+    color: white;
 }
 
 h2 {
@@ -304,6 +305,5 @@ path.line{
 }
 
 .stacked_bars_svg {
-    margin-top: 40px;
     overflow-y: scroll;
 }
