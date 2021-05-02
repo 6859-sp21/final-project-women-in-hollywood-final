@@ -1,10 +1,16 @@
 // stacked bar chart for highest grossing movies
+var width = 960;
+var height = 560;
+var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .classed('stacked_bars_svg', true);
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
-var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg"),
-margin = {top: 20, right: 20, bottom: 30, left: 40},
-width = 960,
-height = 960,
-g = stacked_bars_svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+g = stacked_bars_svg.append("g")
+.attr("width", width)
+.attr("height", height)
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var y = d3.scaleBand()			// x = d3.scaleBand()	
 .rangeRound([0, height])	// .rangeRound([0, width])
@@ -15,10 +21,10 @@ var x = d3.scaleLinear()		// y = d3.scaleLinear()
 .rangeRound([0, width]);	// .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"]);
 
 let all_movies_data;
-d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/all_movies.json", d3.autotype).then(
+d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/all_movies.json", d3.autotype).then(
     function(data) {
         all_movies_data = data;
         all_movies_data.sort(function(x, y){
@@ -31,7 +37,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         var keys = ['0', '1', '2', '3'];
         // console.log(keys , "keys");
         let past_thirty_years = [];
-        for (i = 1990; i<2020; i++) {
+        for (i = 2017; i<2020; i++) {
             past_thirty_years.push(i);
         }
 
@@ -58,18 +64,18 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 if (bechdel_movie && bechdel_movie.rating=='0'){
                     num_passed_0 ++;
                 } 
-                if (bechdel_movie && bechdel_movie.rating==1){
+                else if (bechdel_movie && bechdel_movie.rating==1){
                     num_passed_1++;
                 }  
-                if (bechdel_movie && bechdel_movie.rating==2){
+                else if (bechdel_movie && bechdel_movie.rating==2){
                     num_passed_2++;
                 }    
-                if (bechdel_movie && bechdel_movie.rating==3){
+                else if (bechdel_movie && bechdel_movie.rating==3){
                     num_passed_3++;
                 } else {
                     num_passed_0 ++;
                 }
-                console.log(num_passed_0, "num_passed_0")
+                // console.log(num_passed_0, "num_passed_0")
               
             })
             return {
@@ -92,33 +98,36 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         .selectAll("g")
         .data(d3.stack().keys(keys)(chart_data))
         .enter().append("g")
-            .attr("fill", function(d) { return z(d.test_result); })
+            .attr("fill", function(d) { 
+                return z(d.key); })
         .selectAll("rect")
-        .data(function(d) { return d; })
+        .data(chart_data)
         .enter().append("rect")
-            .attr("y", function(d) { return y(d.bechdel_data.year); })	    //.attr("x", function(d) { return x(d.data.State); })
-            .attr("x", function(d) { return x(d[0]); })			    //.attr("y", function(d) { return y(d[1]); })	
-            .attr("width", function(d) { return x(d[1]) - x(d[0]); })	//.attr("height", function(d) { return y(d[0]) - y(d[1]); })
-            .attr("height", y.bandwidth());						    //.attr("width", x.bandwidth());	
+            .attr("y", function(d) { return y(d.year); })	    
+            .attr("x", function(d) { 
+                return x(d[0]); })			    
+            .attr("width", function(d) { 
+                return x(d[1]) - x(d[0]); })	
+            .attr("height", y.bandwidth());						
 
         g.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0,0)") 						//  .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisLeft(y));									//   .call(d3.axisBottom(x));
+            .attr("transform", "translate(0,0)") 						
+            .call(d3.axisLeft(y));							
 
         g.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0,"+height+")")				// New line
-            .call(d3.axisBottom(x).ticks(null, "s"))					//  .call(d3.axisLeft(y).ticks(null, "s"))
+            .attr("transform", "translate(0,"+height+")")				
+            .call(d3.axisBottom(x).ticks(null, "s"))				
         .append("text")
-            .attr("y", 2)												//     .attr("y", 2)
-            .attr("x", x(x.ticks().pop()) + 0.5) 						//     .attr("y", y(y.ticks().pop()) + 0.5)
-            .attr("dy", "0.32em")										//     .attr("dy", "0.32em")
+            .attr("y", 2)											
+            .attr("x", x(x.ticks().pop()) + 0.5) 					
+            .attr("dy", "0.32em")								
             .attr("fill", "#000")
             .attr("font-weight", "bold")
             .attr("text-anchor", "start")
-            .text("Population")
-            .attr("transform", "translate("+ (-width) +",-10)");   	// Newline
+            .text("Year")
+            .attr("transform", "translate("+ (-width) +",-10)"); 
 
         // var legend = g.append("g")
         //     .attr("font-family", "sans-serif")

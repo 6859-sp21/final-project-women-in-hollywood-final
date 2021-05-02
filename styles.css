@@ -294,3 +294,7 @@ path.line{
 .Thriller .area, .Thriller circle, .Thriller .label {
   fill: darkolivegreen;
 }
+
+.stacked_bars_svg {
+    overflow: auto;
+}
