@@ -1,8 +1,12 @@
 // stacked bar chart for highest grossing movies
 var width = 750;
 var height = 550;
+
+var stacked_bars_legend_svg = d3.select("#highest_gross_chart_legend").append("svg")
+    .attr("width", 800)
+    .attr("height", 100)
 var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
-    .attr("width", width)
+    .attr("width", 800)
     .attr("height", height)
     .classed('stacked_bars_svg', true);
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -124,14 +128,14 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .text("Year")
             .attr("transform", "translate("+ (-width) +",-10)"); 
 
-        var legend = g.append("g")
+        var legend = stacked_bars_legend_svg.append("g")
             .attr("font-family", "sans-serif")
             .attr("font-size", 10)
-            .attr("text-anchor", "end")
+            .attr("text-anchor", "start")
             .selectAll("g")
             .data(keys.slice().reverse())
             .enter().append("g")
-            .attr("transform", function(d, i) { return "translate(" + (i * 20 - 500) + ", 0)"; });
+            .attr("transform", function(d, i) { return "translate(-450, " + (i * 20) + ")"; });
 
         legend.append("rect")
             .attr("x", width - 19)
@@ -140,10 +144,19 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .attr("fill", z);
 
         legend.append("text")
-            .attr("x", width - 24)
+            .attr("x", width + 5)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
-            .text(function(d) { return d; });
+            .classed("text", true)
+            .text(function(d) { 
+                if (d==0){
+                    return "Did not contain two named women"
+                } else if (d==1){
+                    return "Women did not talk to each other"
+                } else if (d==2){
+                    return "Women only talked about men"
+                } 
+            });
 
     }
 )
