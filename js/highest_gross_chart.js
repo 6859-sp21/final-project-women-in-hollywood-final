@@ -41,15 +41,6 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             past_thirty_years.push(i);
         }
 
-        // bechdel_data = blockbusters.map(movie=> {
-        //     // console.log(movie);
-        //     var bechdel_movie = get_movie(movie.film_title)
-        //     // console.log(bechdel_movie, "movie results");
-        //     if (bechdel_movie){
-        //         movie.test_result = bechdel_movie.rating;
-        //     }           
-        // })
-
         chart_data = past_thirty_years.map(year => {
             num_passed_0 = 0;
             num_passed_1 = 0;
@@ -101,13 +92,17 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .attr("fill", function(d) { 
                 return z(d.key); })
         .selectAll("rect")
-        .data(chart_data)
+        .data(function(d) { return d; })
         .enter().append("rect")
-            .attr("y", function(d) { return y(d.year); })	    
+            .attr("y", function(d) { 
+                console.log(d,"d");
+                return y(d.year); })	    
             .attr("x", function(d) { 
+                console.log(d[0], x(d[0]));
                 return x(d[0]); })			    
             .attr("width", function(d) { 
-                return x(d[1]) - x(d[0]); })	
+                // console.log(d[1], d[0], x(d[1]), x(d[0]));
+                return x(d[1])-x(d[0]); })	
             .attr("height", y.bandwidth());						
 
         g.append("g")
