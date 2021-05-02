@@ -27,7 +27,7 @@ var line = d3.line()
         return yScaleGenre(d.amount)
     })
 
-d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/genres2.csv", d3.autoType).then(function (data) {
+d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/genres2.csv", d3.autoType).then(function (data) {
     console.log(data)
     var years = []
     for (i = 1973; i < 2014; i++) {
