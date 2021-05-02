@@ -295,6 +295,15 @@ path.line{
   fill: darkolivegreen;
 }
 
+#highest_gross_chart {
+    width: 800px;
+    height: 400px;
+    overflow-y: scroll;
+    margin:auto;
+    display: flex;
+}
+
 .stacked_bars_svg {
-    overflow: auto;
+    margin-top: 40px;
+    overflow-y: scroll;
 }

@@ -1,27 +1,28 @@
 // stacked bar chart for highest grossing movies
-var width = 960;
-var height = 560;
+var width = 800;
+var height = 960;
 var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", "100%")
     .classed('stacked_bars_svg', true);
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 g = stacked_bars_svg.append("g")
 .attr("width", width)
-.attr("height", height)
+.attr("height", "100%")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 var y = d3.scaleBand()			// x = d3.scaleBand()	
 .rangeRound([0, height])	// .rangeRound([0, width])
-.paddingInner(0.05)
+.paddingInner(0.15)
 .align(0.1);
 
 var x = d3.scaleLinear()		// y = d3.scaleLinear()
 .rangeRound([0, width]);	// .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"]);
+.range(["#99382b", "#ba6f65", "#db8181", "#71c788"]);
 
 let all_movies_data;
 d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/all_movies.json", d3.autotype).then(
@@ -37,7 +38,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         var keys = ['0', '1', '2', '3'];
         // console.log(keys , "keys");
         let past_thirty_years = [];
-        for (i = 2017; i<2020; i++) {
+        for (i = 2019; i>=2000; i--) {
             past_thirty_years.push(i);
         }
 
@@ -80,7 +81,6 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         );
         console.log(chart_data, "chart data");
 
-
         y.domain(past_thirty_years);					// x.domain...
         x.domain([0, 10]).nice();	// y.domain...
         z.domain(keys);
@@ -95,10 +95,10 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         .data(function(d) { return d; })
         .enter().append("rect")
             .attr("y", function(d) { 
-                console.log(d,"d");
-                return y(d.year); })	    
+                // console.log(d,"d");
+                return y(d.data.year); })	    
             .attr("x", function(d) { 
-                console.log(d[0], x(d[0]));
+                // console.log(d[0], x(d[0]));
                 return x(d[0]); })			    
             .attr("width", function(d) { 
                 // console.log(d[1], d[0], x(d[1]), x(d[0]));
@@ -124,27 +124,26 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .text("Year")
             .attr("transform", "translate("+ (-width) +",-10)"); 
 
-        // var legend = g.append("g")
-        //     .attr("font-family", "sans-serif")
-        //     .attr("font-size", 10)
-        //     .attr("text-anchor", "end")
-        // .selectAll("g")
-        // .data(keys.slice().reverse())
-        // .enter().append("g")
-        // //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-        //     .attr("transform", function(d, i) { return "translate(-50," + (300 + i * 20) + ")"; });
+        var legend = g.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(keys.slice().reverse())
+            .enter().append("g")
+            .attr("transform", function(d, i) { return "translate(" + (i * 20 - 500) + ", 0)"; });
 
-        // legend.append("rect")
-        //     .attr("x", width - 19)
-        //     .attr("width", 19)
-        //     .attr("height", 19)
-        //     .attr("fill", z);
+        legend.append("rect")
+            .attr("x", width - 19)
+            .attr("width", 19)
+            .attr("height", 19)
+            .attr("fill", z);
 
-        // legend.append("text")
-        //     .attr("x", width - 24)
-        //     .attr("y", 9.5)
-        //     .attr("dy", "0.32em")
-        //     .text(function(d) { return d; });
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9.5)
+            .attr("dy", "0.32em")
+            .text(function(d) { return d; });
 
     }
 )
