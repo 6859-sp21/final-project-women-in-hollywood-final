@@ -216,6 +216,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         var focus = svg.append("g")
             .append("circle")
             .style("fill", "none")
+            .style("stroke", "white")
             .attr("stroke", "black")
             .attr("r", 8.5)
             .style("opacity", 0)
