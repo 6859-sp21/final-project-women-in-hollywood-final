@@ -168,7 +168,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .attr("font-size", 10)
             .attr("text-anchor", "start")
             .selectAll("g")
-            .data(keys.slice().reverse())
+            .data(keys.reverse().slice(1,))
             .enter().append("g")
             .attr("transform", function(d, i) { return "translate(-450, " + (i * 20) + ")"; });
 
