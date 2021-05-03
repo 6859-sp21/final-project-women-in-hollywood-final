@@ -21,7 +21,7 @@ h2 {
 .two-col {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .selected {
@@ -312,7 +312,6 @@ path.line{
 #highest_gross_chart {
     width: 800px;
     height: 600px;
-    margin:auto;
 }
 
 .stacked_bars_svg {
@@ -344,4 +343,8 @@ path.line{
 
 .poll {
     margin: auto;
+}
+
+#highest_grossing_movies {
+    font-size: x-small;
 }

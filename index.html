@@ -38,13 +38,20 @@
    
     <p style="padding-top: 20px">In fact, most of the top grossing movies per year still fail this simple test.</p>
     <h2>Highest Grossing Movies (Past 20 Years)</h2>
+    <small>The number of movies that passed the Bechdel Test in the top ten grossing movies per year.</small>
     
     <div id="highest_gross_chart_legend">
         <!-- This is where we will put our chart legend. -->
     </div>
-    <div id="highest_gross_chart">
-      <!-- This is where we will put our percentage chart. -->
+    <div class="two-col">
+        <div id="highest_gross_chart">
+            <!-- This is where we will put our percentage chart. -->
+        </div>
+        <div id="highest_gross_movies">
+        <!-- list of movies. -->
+        </div>
     </div>
+    
 
     <p >In 2019, only half of the top ten blockbusters passed the Bechdel Test.</p>
     <p>Perhaps genres will tell us a different story?</p>
@@ -76,8 +83,8 @@
 
     <div>Data Sources: 
         <a href="https://github.com/fivethirtyeight/data/tree/master/bechdel">FiveThirtyEight</a>
-        <a href="https://bechdeltest.com/">The Bechdel Test API</a>, 
-        <a href="https://www.kaggle.com/narmelan/top-ten-blockbusters-20191977">Top Ten Blockbusters</a>, 
+        <a href="https://bechdeltest.com/"> The Bechdel Test API</a>, 
+        <a href="https://www.kaggle.com/narmelan/top-ten-blockbusters-20191977"> Top Ten Blockbusters</a>
     </div>
 
     <script src="js/poll.js"></script>

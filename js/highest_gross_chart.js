@@ -9,6 +9,9 @@ var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
     .attr("width", 800)
     .attr("height", height)
     .classed('stacked_bars_svg', true);
+var highest_grossing_movies = d3.select("#highest_gross_movies").append("svg")
+    .attr("width", 300)
+    .attr("height", height)
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 g = stacked_bars_svg.append("g")
@@ -27,6 +30,9 @@ var x = d3.scaleLinear()		// y = d3.scaleLinear()
 
 var z = d3.scaleOrdinal()
 .range(["#99382b", "#ba6f65", "#db8181", "black"]);
+
+var z_good = d3.scaleOrdinal()
+.range([  "#71c788","#db8181", "#ba6f65", "#99382b"]);
 
 let all_movies_data;
 d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/all_movies.json", d3.autotype).then(
@@ -51,6 +57,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             num_passed_1 = 0;
             num_passed_2 = 0;
             num_passed_3 = 0;
+            movies = [];
             // console.log(year)
             blockbusters.filter(movie => movie.release_year==year)
             .forEach(movie => {
@@ -71,6 +78,10 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 } else {
                     num_passed_0 ++;
                 }
+                movies.push({
+                    ...bechdel_movie,
+                    "title": movie.film_title
+                });
                 // console.log(num_passed_0, "num_passed_0")
               
             })
@@ -80,9 +91,24 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 '1': num_passed_1,
                 '2': num_passed_2,
                 '3': num_passed_3,
+                'movies': movies
             }
-        }
-        );
+        });
+
+        function get_movie(search_title){
+            // get the searched movie name
+            new_search_title=String(search_title);
+            // console.log(search_title)
+            if (new_search_title && new_search_title.slice(0, 3)==="The") {
+                new_search_title = new_search_title.slice(4)+ ", The";
+            }
+            // console.log(new_search_title)
+            movie=all_movies_data.find(movie=>{
+                return movie.title==new_search_title;
+            });
+            // console.log(movie);
+            if (movie) return movie;
+        };
         // console.log(chart_data, "chart data");
 
         y.domain(past_twenty_years);					
@@ -115,7 +141,9 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 return x(d[0]); })			    
             .attr("width", function(d) { 
                 return x(d[1])-x(d[0]); })	
-            .attr("height", y.bandwidth())		
+            .attr("height", y.bandwidth())	
+            
+        stacked_bars_svg.selectAll("rect").on('mouseover', show_movies)	
 
         g.append("g")
             .attr("class", "axis")
@@ -165,17 +193,30 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                     return "Women only talked about men"
                 } 
             });
+        target_movies=[]
+        function show_movies(data) {
+            if (data.target.__data__.data.movies != target_movies) {
+                target_movies = data.target.__data__.data.movies;
+                console.log(target_movies)
+                highest_grossing_movies.selectAll('*').remove();
+                target_movies.forEach((movie, i)=>{
+                    console.log(movie.rating)
+                    highest_grossing_movies.append("text")
+                    .text(movie.title)
+                    .attr("x", 0)
+                    .attr("y", 50+20*i)
+                    .attr("fill", movie.rating ? z_good(movie.rating): z_good(0))
+                    .style("font-size", "10px")
+                })
+                
+            }
+            
+            
+        }
 
     }
 )
-function get_movie(search_title){
-    // get the searched movie name
-    // console.log("search title", search_title);
-    index = movie_names.indexOf(search_title)
-    if (index != -1){
-      return all_movies_data[index];
-    }
-};
+
 
 const blockbusters = [
     {
@@ -1003,7 +1044,7 @@ const blockbusters = [
         "release_year": 2005
     },
     {
-        "film_title": "Mr. & Mrs. Smith",
+        "film_title": "Mr. and Mrs. Smith",
         "release_year": 2005
     },
     {
@@ -1127,11 +1168,11 @@ const blockbusters = [
         "release_year": 2008
     },
     {
-        "film_title": "Iron Man ",
+        "film_title": "Iron Man",
         "release_year": 2008
     },
     {
-        "film_title": "WALL�E",
+        "film_title": "WALL-E",
         "release_year": 2008
     },
     {
@@ -1171,7 +1212,7 @@ const blockbusters = [
         "release_year": 2009
     },
     {
-        "film_title": "Angels & Demons",
+        "film_title": "Angels and Demons",
         "release_year": 2009
     },
     {
@@ -1299,7 +1340,7 @@ const blockbusters = [
         "release_year": 2012
     },
     {
-        "film_title": "Frozen ",
+        "film_title": "Frozen",
         "release_year": 2013
     },
     {
@@ -1319,7 +1360,7 @@ const blockbusters = [
         "release_year": 2013
     },
     {
-        "film_title": "Fast & Furious 6",
+        "film_title": "Fast and Furious 6",
         "release_year": 2013
     },
     {
@@ -1575,7 +1616,7 @@ const blockbusters = [
         "release_year": 2019
     },
     {
-        "film_title": "Fast & Furious Presents: Hobbs & Shaw",
+        "film_title": "Fast and Furious Presents: Hobbs and Shaw",
         "release_year": 2019
     }
 ]
