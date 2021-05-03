@@ -1,6 +1,6 @@
 // stacked bar chart for highest grossing movies
 var width = 750;
-var height = 550;
+var height = 600;
 
 var stacked_bars_legend_svg = d3.select("#highest_gross_chart_legend").append("svg")
     .attr("width", 800)
@@ -103,11 +103,20 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 return y(d.data.year); })	    
             .attr("x", function(d) { 
                 // console.log(d[0], x(d[0]));
-                return x(d[0]); })			    
+                return 0; })			    
             .attr("width", function(d) { 
                 // console.log(d[1], d[0], x(d[1]), x(d[0]));
+                return 0; })	
+            .attr("height", y.bandwidth())	
+        
+        stacked_bars_svg.selectAll("rect")
+            .transition().duration(1000)	
+            .attr("x", function(d) { 
+                console.log("hellooooo???")
+                return x(d[0]); })			    
+            .attr("width", function(d) { 
                 return x(d[1])-x(d[0]); })	
-            .attr("height", y.bandwidth());						
+            .attr("height", y.bandwidth())		
 
         g.append("g")
             .attr("class", "axis")
@@ -116,7 +125,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
 
         g.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0,"+(height-50)+")")				
+            .attr("transform", "translate(0,"+(height-100)+")")				
             .call(d3.axisBottom(x).ticks(null, "s"))				
         .append("text")
             .attr("y", 2)											

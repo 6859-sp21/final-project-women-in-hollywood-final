@@ -310,10 +310,8 @@ path.line{
 
 #highest_gross_chart {
     width: 800px;
-    height: 400px;
-    overflow-y: scroll;
+    height: 600px;
     margin:auto;
-    display: flex;
 }
 
 .stacked_bars_svg {
