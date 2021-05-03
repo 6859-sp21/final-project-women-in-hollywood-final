@@ -51,7 +51,7 @@ function display_poll_results(poll_results_json) {
     bars.append("rect")
         .attr("class", "bar")
         .attr("y", function (d) {
-            return y(d.name);
+            return y(d.name)+8;
         })
         .attr("height", 36)
         .attr("x", 0)
@@ -72,7 +72,7 @@ function display_poll_results(poll_results_json) {
         .attr("class", "percent_label")
         //y position of the label is halfway down the bar
         .attr("y", function (d) {
-            return y(d.name) + 25;
+            return y(d.name) + 25 + 8;
         })
         //x position is 3 pixels to the right of the bar
         .attr("x", function (d) {
@@ -87,7 +87,7 @@ function display_poll_results(poll_results_json) {
         .attr("class", "label")
         //y position of the label is halfway down the bar
         .attr("y", function (d) {
-            return y(d.name) + 24;
+            return y(d.name) + 24 + 8;
         })
         .attr("x", function (d) {
             return 10;

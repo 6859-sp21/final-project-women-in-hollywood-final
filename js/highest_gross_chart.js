@@ -29,7 +29,7 @@ var x = d3.scaleLinear()		// y = d3.scaleLinear()
 .rangeRound([0, width]);	// .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#99382b", "#ba6f65", "#db8181", "black"]);
+.range(["#99382b", "#ba6f65", "#db8181"]);
 
 var z_good = d3.scaleOrdinal()
 .range([  "#71c788","#db8181", "#ba6f65", "#99382b"]);
@@ -56,7 +56,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             num_passed_0 = 0;
             num_passed_1 = 0;
             num_passed_2 = 0;
-            num_passed_3 = 0;
+            // num_passed_3 = 0;
             movies = [];
             // console.log(year)
             blockbusters.filter(movie => movie.release_year==year)
@@ -74,7 +74,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                     num_passed_2++;
                 }    
                 else if (bechdel_movie && bechdel_movie.rating==3){
-                    num_passed_3++;
+                    
                 } else {
                     num_passed_0 ++;
                 }
@@ -90,7 +90,6 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 '0': num_passed_0,
                 '1': num_passed_1,
                 '2': num_passed_2,
-                '3': num_passed_3,
                 'movies': movies
             }
         });
