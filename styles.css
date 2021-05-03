@@ -210,12 +210,24 @@ li{
   list-style-type: none;
 }
 
+.static_year {
+  fill: white;
+}
+
+.caption {
+  fill: white;
+}
+
+.year {
+  fill: white;
+}
+
 rect.bg{
   opacity: 0;
 }
 
 .area {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 
 .axis line {

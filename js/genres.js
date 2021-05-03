@@ -129,6 +129,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holly
             .text(function (d) { return d[d.length - 1].year });
 
         circle = svg.append("circle")
+            .classed("yearCircle", true)
             .attr("r", 2.2)
             .attr("opacity", 0)
             .style("pointer-events", "none");
@@ -157,14 +158,15 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holly
 })
 
 function mouseOverFunc(d) {
-    d3.selectAll("circle").attr("opacity", 1.0);
+    d3.selectAll(".yearCircle").attr("opacity", 1.0);
     d3.selectAll(".static_year").classed("hidden", true);
     return mouseMoveFunc.call(this);
 }
 function mouseMoveFunc(d) {
     var year = Math.round(xScaleGenre.invert(d3.pointer(d)[0]));
     var index = year - 1973;
-    d3.selectAll("circle")
+    d3.selectAll(".yearCircle")
+        .attr("r", 5)
         .attr("cx", xScaleGenre(year))
         .attr("cy", function (c) {
             if (typeof (c) == "object") {
@@ -192,7 +194,7 @@ function mouseMoveFunc(d) {
 }
 function mouseOutFunc(d) {
     d3.selectAll(".static_year").classed("hidden", false);
-    d3.selectAll("circle").attr("opacity", 0);
+    d3.selectAll(".yearCircle").attr("opacity", 0);
     d3.selectAll("text.caption").text("");
     d3.selectAll("text.year").text("");
 }
