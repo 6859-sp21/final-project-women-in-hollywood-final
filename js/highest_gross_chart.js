@@ -85,8 +85,8 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         );
         // console.log(chart_data, "chart data");
 
-        y.domain(past_twenty_years);					// x.domain...
-        x.domain([0, 10]).nice();	// y.domain...
+        y.domain(past_twenty_years);					
+        x.domain([0, 10]).nice();	
         z.domain(keys);
 
         g.append("g")
@@ -112,7 +112,6 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
         stacked_bars_svg.selectAll("rect")
             .transition().duration(1000)	
             .attr("x", function(d) { 
-                console.log("hellooooo???")
                 return x(d[0]); })			    
             .attr("width", function(d) { 
                 return x(d[1])-x(d[0]); })	

@@ -321,3 +321,25 @@ path.line{
 .text {
     fill: white;
 }
+
+/* poll */
+.poll_question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.poll_button {
+    margin: 8px 12px;
+    padding: 8px 12px;
+    width: 350px;
+    border-style: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.poll {
+    margin: auto;
+}
