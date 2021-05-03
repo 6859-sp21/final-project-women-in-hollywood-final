@@ -90,7 +90,7 @@ function display_poll_results(poll_results_json) {
             return y(d.name) + 24;
         })
         .attr("x", function (d) {
-            return 5;
+            return 10;
         })
         .attr("fill", "white")
         .text(function (d) {
