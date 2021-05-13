@@ -3,6 +3,7 @@ var poll_results_json = [{"name": "Yes", "value": 10},{"name": "No", "value": 5}
 // intro poll
 var width = 400;
 var height = 100;
+var barHeight = 40;
 
 function setColor(vote) {
     return vote == "Yes" ? "#71c788" : "#db8181";
@@ -23,8 +24,8 @@ function cast_vote(d){
 
 function display_poll_results(poll_results_json) {
     poll_g = poll_result_svg.append("g")
-    .attr("width", 400)
-    .attr("height", 200)
+    .attr("width", width)
+    .attr("height", height)
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     poll_results_json.sort(function (a, b) {
@@ -53,7 +54,7 @@ function display_poll_results(poll_results_json) {
         .attr("y", function (d) {
             return y(d.name)+8;
         })
-        .attr("height", 36)
+        .attr("height", barHeight)
         .attr("x", 0)
         .attr("fill",  function (d) { return setColor(d.name) })
         .attr("width", function (d) {
@@ -62,7 +63,7 @@ function display_poll_results(poll_results_json) {
 
     bars.selectAll("rect")
         .transition().duration(1000)	
-        .attr("height", 36)
+        .attr("height", barHeight)
         .attr("x", 0)
         .attr("width", function (d) {
             return x(d.value);

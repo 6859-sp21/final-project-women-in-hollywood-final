@@ -5,82 +5,94 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>The Exclusion of Women In Hollywood</h1>
+    <section class='sec1'>
+      <h1>The Exclusion of Women In Hollywood</h1>
 
-    <p>Do you think Hollywood has improved its representation of women?</p>
-    <small>Respond to see what other visitors think.</small>
-    <div id="poll_question" class="poll_question">
-        <!-- bruh -->      
-    </div>
-    <div id="poll_results">
-        <!-- no matter how jank...if it works it works -->
-    </div>
-
-    <h2>How do we evaluate the representation of women in movies?</h2>
-    <p>To do this, we use something called the <strong>Bechdel Test</strong>.</p>
-    <p>The Bechdel Test, or Bechdel-Wallace Test, sometimes called the Bechdel Rule is a simple test which names the following three criteria: 
-      <ul>
-        <li>(1) it has to have at least two women in it, </li>
-        <li>(2) who talk to each other, about </li>
-        <li>(3) something besides a man.</li>
-      </ul>
-    </p>
-
-    <h2>Did your favorite childhood movie pass the test?</h2>
-    <p>Search for it to find out.</p>
-    <div class="search-input">
-      <input type="text" placeholder="Type to search..">
-      <div class="autocom-box">
-        <!-- here list are inserted from javascript -->
+      <h3 style="padding-top: 130px">Do you think Hollywood has improved its representation of women?</h3>
+      <small>Respond to see what other visitors think.</small>
+      <div id="poll_question" class="poll_question">
+        <!-- bruh -->
       </div>
-      <div class="movie_result hidden"></div>
-    </div>
+      <div id="poll_results" style="padding-bottom: 4px;">
+        <!-- no matter how jank...if it works it works -->
+      </div>
+    </section>
+
+    <section class="sec2">
+      <h1>How do we evaluate<br>the representation of women in movies?</h1>
+      
+      <div style="padding-top: 50px;">
+        <h2>To do this, we use something called the <strong><u>Bechdel Test</u></strong>.</h2>
+        <p>The Bechdel Test, or Bechdel-Wallace Test, sometimes called the Bechdel Rule is a simple test which names the following three criteria: 
+          <ul>
+            <li><b>(1)</b> it has to have at least two women in it, </li>
+            <li><b>(2)</b> who talk to each other, about </li>
+            <li><b>(3)</b> something besides a man.</li>
+          </ul>
+        </p>
+      </div>
+  
+      <h2 style="padding-top: 50px;">Did your favorite movies pass the Bechdel Test?</h2>
+      <p>Search for it to find out.</p>
+      <div class="search-input">
+        <input type="text" placeholder="Type to search..">
+        <div class="autocom-box">
+          <!-- here list are inserted from javascript -->
+        </div>
+        <div class="movie_result hidden"></div>
+      </div>
+    </section>
+
+    <section class="sec3">
+      <h2>In fact, most of the top grossing movies per year still fail this simple test.</h2>
+      <h1 style="padding-top: 20px;">Highest Grossing Movies (Past 20 Years)</h1>
+      <small>The number of movies that passed the Bechdel Test in the top ten grossing movies per year.</small>
+      
+      <div id="highest_gross_chart_legend">
+          <!-- This is where we will put our chart legend. -->
+      </div>
+      <div class="two-col">
+          <div id="highest_gross_chart">
+              <!-- This is where we will put our percentage chart. -->
+          </div>
+          <div id="highest_gross_movies">
+          <!-- list of movies. -->
+          </div>
+      </div>
+      <p style="padding-top: 20px;">In 2019, only half of the top ten blockbusters passed the Bechdel Test.</p>
+    </section>
    
-    <p style="padding-top: 20px">In fact, most of the top grossing movies per year still fail this simple test.</p>
-    <h2>Highest Grossing Movies (Past 20 Years)</h2>
-    <small>The number of movies that passed the Bechdel Test in the top ten grossing movies per year.</small>
-    
-    <div id="highest_gross_chart_legend">
-        <!-- This is where we will put our chart legend. -->
-    </div>
-    <div class="two-col">
-        <div id="highest_gross_chart">
-            <!-- This is where we will put our percentage chart. -->
-        </div>
-        <div id="highest_gross_movies">
-        <!-- list of movies. -->
-        </div>
-    </div>
-    
+    <section class="sec4">
+      <h2>Perhaps genres will tell us a different story?</h2>
+      <h1 style="padding-top: 20px;">Genres</h1>
+      <p>Percentage of movies for 9 select movie genres that passed the Bechdel test</p>
+  
+      <div id="genres_line_chart">
+        <!-- This is where we will put our genres chart. -->
+      </div>
+    </section>
 
-    <p >In 2019, only half of the top ten blockbusters passed the Bechdel Test.</p>
-    <p>Perhaps genres will tell us a different story?</p>
-    <h2>Genres</h2>
-    <p>Percentage of movies for 9 select movie genres that passed the Bechdel test</p>
-
-    <div id="genres_line_chart">
-      <!-- This is where we will put our genres chart. -->
-    </div>
-
-    <h2>Percentage of Movies Passing the Bechdel Test from 1973 to 2013</h2>
-    <p><i>Click and drag to select years to explore <a href="#bubbleYear">below</a></i></p>
-    <button id="resetButton" style="text-align: right;">CLEAR SELECTION</button>
-    <div id="line_chart">
-      <!-- This is where we will put our line chart. -->
-    </div>
-
-    <h2>A Closer Look</h2>
-    <p>Movie Years: <span id="bubbleYear"></span></p>
-
-    <div class="two-col">
-        <div id="bubble_chart">
-            <!-- This is where we will put our bubble chart. -->
-        </div>
-        <div id="bubble_legend" >
-            <!-- This is where we will put our bubble legend. -->
-            <div class="button_group"></div>
-        </div>
-    </div>
+    <section class="sec5">
+      <h1>Percentage of Movies Passing the Bechdel Test<br>(1973 to 2013)</h1>
+      <p><i>Click and drag to select years to explore <a href="#bubbleYear">below</a></i></p>
+      <button id="resetButton" style="text-align: right;">CLEAR SELECTION</button>
+      <div id="line_chart">
+        <!-- This is where we will put our line chart. -->
+      </div>
+  
+      <h2>A Closer Look</h2>
+      <p>Movie Years: <span id="bubbleYear"></span></p>
+  
+      <div class="two-col">
+          <div id="bubble_chart">
+              <!-- This is where we will put our bubble chart. -->
+          </div>
+          <div id="bubble_legend" >
+              <!-- This is where we will put our bubble legend. -->
+              <div class="button_group"></div>
+          </div>
+      </div>
+    </section>
 
     <div>Data Sources: 
         <a href="https://github.com/fivethirtyeight/data/tree/master/bechdel">FiveThirtyEight</a>

@@ -9,7 +9,6 @@
 body {
     background-color: black;
     text-align: center;
-    padding: 50 10;
     color: white;
 }
 
@@ -115,6 +114,9 @@ h2 {
   border-right: 1px lightgray solid;
   border-left: 1px lightgray solid;
   border-radius: 10px;
+  position: absolute;
+  right: 0;
+  left: 0;
 }
 
 .search-input .autocom-box{
@@ -173,11 +175,14 @@ h2 {
     margin-left: auto;
     margin-right: auto;
     width: 30em;
-    /* background-color: lightgray; */
+    background-color: rgba(255, 255, 255, .5);
     border-radius: 5px;
-    padding: 20px;
-    
+    /* padding: 20px; */
+    position: absolute;
+    left: 0;
+    right: 0;
 }
+
 .hidden {
     display: none;
 }
@@ -339,6 +344,7 @@ path.line{
     color: white;
     font-size: 16px;
     cursor: pointer;
+    height: 36px;
 }
 
 .poll {
@@ -347,4 +353,31 @@ path.line{
 
 #highest_grossing_movies {
     font-size: x-small;
+}
+
+section {
+  padding: 20vh 0 20vh 0;
+  background-size: cover;
+}
+
+.sec1 {
+  padding: 20vh 0 40vh 0;
+  background: black;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+.sec2 {
+  background: gray;
+  padding: 20vh 0 75vh 0;
+}
+
+.sec3 {
+  background: black;
+}
+
+.sec4 {
+  background: gray;
 }
