@@ -1,4 +1,26 @@
-var poll_results_json = [{"name": "Yes", "value": 10},{"name": "No", "value": 5}];
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyCpjRTC3KmhRgrwBKKwLJvhrW_Kw8rvP_Y",
+    authDomain: "datavizfinal-cd6ad.firebaseapp.com",
+    projectId: "datavizfinal-cd6ad",
+    storageBucket: "datavizfinal-cd6ad.appspot.com",
+    messagingSenderId: "473927765723",
+    appId: "1:473927765723:web:34968554648a27d64706fe"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var poll_results_json = [{"name": "Yes", "value": 0},{"name": "No", "value": 0}];
+var pollTot = 0
+function updateVals(){
+    firebase.database().ref('poll').on('value', function (snapshot) {
+        poll_results_json[0]["value"] = snapshot.val().yes
+        poll_results_json[1]["value"] = snapshot.val().no
+        pollTot = poll_results_json[0]['value'] + poll_results_json[1]['value']
+    })
+}
+updateVals()
+console.log(poll_results_json)
 
 // intro poll
 var width = 400;
@@ -12,11 +34,18 @@ function setColor(vote) {
 function cast_vote(d){
     // bruh;
     const vote = d.target.name;
-    if (vote == "Yes"){
-      poll_results_json[0]["value"]++;
-    } else if (vote == "No") {
-      poll_results_json[1]["value"]++;
+    if (vote == "yes"){
+      firebase.database().ref('poll').update({
+        "yes": poll_results_json[0]["value"]+1,
+        "no": poll_results_json[1]["value"]
+      });
+    } else if (vote == "no") {
+      firebase.database().ref('poll').update({
+        "yes": poll_results_json[0]["value"],
+        "no": poll_results_json[1]["value"]+1
+      });
     }
+    updateVals()
     poll_result_svg.style("display","flex")
     d3.select("#poll_question").style("display", "none")
     display_poll_results(poll_results_json);
@@ -81,7 +110,7 @@ function display_poll_results(poll_results_json) {
         })
         .attr("fill", "white")
         .text(function (d) {
-            return (d.value/16 *100 + "%");
+            return (Math.round(d.value/pollTot *100) + "%");
         });
 
     bars.append("text")
