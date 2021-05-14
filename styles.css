@@ -23,6 +23,9 @@ h2 {
     justify-content: center;
 }
 
+.col {
+  margin:12px;
+}
 .selected {
     opacity: 1 !important;
     stroke: black;
@@ -370,7 +373,7 @@ h1 {
 }
 
 .sec2 {
-  background: gray;
+  background: black;
   padding: 20vh 0 75vh 0;
 }
 

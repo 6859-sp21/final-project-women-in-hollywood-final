@@ -1,5 +1,5 @@
 // stacked bar chart for highest grossing movies
-var width = 750;
+var width = 700;
 var height = 600;
 
 var stacked_bars_legend_svg = d3.select("#highest_gross_chart_legend").append("svg")
@@ -9,9 +9,7 @@ var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
     .attr("width", 800)
     .attr("height", height)
     .classed('stacked_bars_svg', true);
-var highest_grossing_movies = d3.select("#highest_gross_movies").append("svg")
-    .attr("width", 300)
-    .attr("height", height)
+var highest_grossing_movies = d3.select(".movie_list")
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 g = stacked_bars_svg.append("g")
@@ -192,20 +190,25 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                     return "Women only talked about men"
                 } 
             });
+        
+        const movie_list_g = g.append("g")
+            .attr("class", "movie_list")
+            .attr("transform", "translate(200,0)");
+                
         target_movies=[]
         function show_movies(data) {
             if (data.target.__data__.data.movies != target_movies) {
                 target_movies = data.target.__data__.data.movies;
-                console.log(target_movies)
-                highest_grossing_movies.selectAll('*').remove();
+                // console.log(target_movies)
+                movie_list_g.selectAll('*').remove();
                 target_movies.forEach((movie, i)=>{
-                    console.log(movie.rating)
-                    highest_grossing_movies.append("text")
-                    .text(movie.title)
-                    .attr("x", 0)
-                    .attr("y", 50+20*i)
-                    .attr("fill", movie.rating ? z_good(movie.rating): z_good(0))
-                    .style("font-size", "10px")
+                    // console.log(movie.rating);
+                    movie_list_g.append("text")
+                        .text(movie.title)
+                        .attr("x", 300)
+                        .attr("y", 10+20*i)
+                        .attr("fill", movie.rating ? z_good(movie.rating): z_good(0))
+                        .style("font-size", "10px")
                 })
                 
             }
