@@ -30,7 +30,18 @@ var userScore = 0;
 
 d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/movies.csv', d3.autoType)
     .then(function (movies) {
-        pop_movies = movies.filter(mov => mov.domgross >= 100000000);
+        // pass = movies.filter(mov => (mov.domgross >= 100000000)&&(mov.binary=="PASS"));
+        // pass = pass.sort(() => 0.5 - Math.random());
+        // pass = pass.slice(0, 5)
+
+        // fail = movies.filter(mov => (mov.domgross >= 100000000) && (mov.binary == "FAIL"));
+        // fail = fail.sort(() => 0.5 - Math.random());
+        // fail = fail.slice(0, 5)
+
+        // pop_movies = pass.concat(fail)
+        // pop_movies = pop_movies.sort(() => 0.5 - Math.random());
+
+        pop_movies = movies.filter(mov => (mov.domgross >= 100000000));
         pop_movies = pop_movies.sort(() => 0.5 - Math.random());
         pop_movies = pop_movies.slice(0, 10)
 
