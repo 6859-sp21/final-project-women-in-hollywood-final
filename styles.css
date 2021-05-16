@@ -384,3 +384,13 @@ h1 {
 .sec4 {
   background: gray;
 }
+
+.correct {
+  stroke: #71c788;
+  stroke-width: 5
+}
+
+.incorrect {
+  stroke: #db8181;
+  stroke-width: 5;
+}

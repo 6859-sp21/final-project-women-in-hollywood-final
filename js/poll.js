@@ -20,7 +20,7 @@ function updateVals(){
     })
 }
 updateVals()
-console.log(poll_results_json)
+// console.log(poll_results_json)
 
 // intro poll
 var width = 400;
