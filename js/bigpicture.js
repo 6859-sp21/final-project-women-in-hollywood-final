@@ -89,13 +89,16 @@ const latestYear = 2013;
 
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 10, bottom: 40, left: 40 },
-    width = 900,
-    height = 450;
+    width = 600,
+    height = 400;
 
 
 // for the bubble chart
-var bubble_chart_width = 720,
-    bubble_chart_height = 650;
+var bubble_chart_width = 400,
+    bubble_chart_height = 500;
+
+var bubble_legend_width = 300,
+    bubble_legend_height = 500;
 
 var w = bubble_chart_width, h = bubble_chart_height;
 
@@ -106,8 +109,8 @@ var bubble_chart_svg = d3.select("#bubble_chart").append("svg")
     .attr("height", h)
 
 var bubble_legend_svg = d3.select("#bubble_legend").append("svg")
-    .attr("width", 320)
-    .attr("height", 400)
+    .attr("width", bubble_legend_width)
+    .attr("height", bubble_legend_height)
 
 var simulation = d3.forceSimulation()
     .force("collide", d3.forceCollide(function (d) {
@@ -494,11 +497,11 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
 
         function setScale(value) {
             if (radius_var == 'intgross') {
-                return Math.sqrt(value * 0.00001 / Math.PI)
+                return Math.sqrt(value * 0.00001 / Math.PI / 2)
             } else if (radius_var == 'domgross') {
-                return Math.sqrt(value * 0.000015 / Math.PI)
+                return Math.sqrt(value * 0.000015 / Math.PI / 2)
             } else if (radius_var == 'budget') {
-                return Math.sqrt(value * 0.00002 / Math.PI)
+                return Math.sqrt(value * 0.00002 / Math.PI / 2)
             }
         }
 
@@ -663,9 +666,9 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
                     .attr('y', margin.top + 30)
-                    .attr('fill', 'gray')
+                    .attr('fill', 'white')
                     .attr('font-family', 'Helvetica Neue, Arial')
-                    // .attr('font-weight', 500)
+                    .attr('font-weight', 500)
                     .attr('font-size', 30)
                     .attr('text-align', 'center')
                     .attr("dominant-baseline", "middle")
@@ -676,10 +679,9 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
                     .attr('y', margin.top + 60)
-                    .attr('fill', 'gray')
                     .attr('font-family', 'Helvetica Neue, Arial')
                     // .attr('font-weight', 500)
-                    // .attr('font-size', 80)
+                    .attr('font-size', 12)
                     .attr("dominant-baseline", "middle")
                     .attr("text-anchor", "middle")
                     .attr("fill", "white")
@@ -714,13 +716,14 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         }
         bubbleLegendCount()
         bubble_legend_svg.append("text")
-            .attr("x", 0)
+            .attr("x", "50%")
             .attr("y", 180)
-            .attr("text-anchor", "left")
+            .attr("dominant-baseline", "middle")
+            .attr("text-anchor", "middle")
             .classed("legend_caption", true)
             .style("alignment-baseline", "middle")
-            .text("hover on PASS or FAIL to highlight only those bubbles")
-            .attr("fill", "white")
+            .text("Hover on PASS or FAIL to highlight bubbles")
+            .attr("fill", "gray")
 
 
         // What to do when one group is hovered
