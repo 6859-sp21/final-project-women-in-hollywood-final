@@ -23,8 +23,8 @@
 // console.log(poll_results_json)
 
 // intro poll
-var width = 400;
-var height = 100;
+var gameWidth = 400;
+var gameHeight = 100;
 var barHeight = 40;
 var userScore = 0;
 
@@ -78,8 +78,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         
         function display_poll_results(poll_results_json) {
             poll_g = poll_result_svg.append("g")
-            .attr("width", width)
-            .attr("height", height)
+                .attr("width", gameWidth)
+                .attr("height", gameHeight)
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             
             poll_results_json.sort(function (a, b) {
@@ -155,8 +155,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         }
         
         var poll_result_svg = d3.select("#poll_results").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", gameWidth)
+            .attr("height", gameHeight)
             .style("display", "none")  
             .classed('poll', true);
 
@@ -193,15 +193,15 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                     return d.binary
                 })
                 .attr("value", "PASS")
-                .attr("width", width)
-                .attr("height", height)
+                .attr("width", gameWidth)
+                .attr("height", gameHeight)
                 .style("fill", "white")
                 .on("click", cast_vote)
 
             svg.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
-                .attr("x", width/2-30)
+                .attr("x", gameWidth/2-30)
                 .attr("y", barHeight/2)
                 .style("fill", "black")
                 .text("PASS")
@@ -217,15 +217,15 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 })
                 .attr("value", "FAIL")
                 .attr("y", barHeight + 10)
-                .attr("width", width)
-                .attr("height", height)
+                .attr("width", gameWidth)
+                .attr("height", gameHeight)
                 .style("fill",  "#222")
                 .on("click", cast_vote);
             
             svg.append("text")
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
-                .attr("x", width / 2 - 30)
+                .attr("x", gameWidth / 2 - 30)
                 .attr("y", barHeight + 10 + barHeight / 2)
                 .style("fill", "white")
                 .text("FAIL")
