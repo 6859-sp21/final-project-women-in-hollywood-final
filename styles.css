@@ -404,3 +404,8 @@ h1 {
 .x-axis-grid > path {
   stroke: none;
 }
+
+article {
+  column-count: 2;
+  column-width: 900px;
+}

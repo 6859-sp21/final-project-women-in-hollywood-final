@@ -399,7 +399,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .append('circle')
                 .classed('bubble', true)
                 .attr('r', d => d.r)
-                .attr('fill', d => setColor(d.binary))
+                .attr('fill', d => setColor2(d.clean_test))
                 .attr("class", function (d) { return "bubbles " + d.binary })
                 .attr("cx", function (d, i) { return 175 + 25 * i + 2 * i ** 2; })
                 .attr("cy", function (d, i) { return 250; })
@@ -450,7 +450,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                         .style("left", "-1000px")
 
                     d3.select(this)
-                        .style("stroke", setColor(d.binary))
+                        .style("stroke", setColor2(d.clean_test))
                 })
 
             // labels
@@ -506,6 +506,20 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         function setColor(test_result) {
             return test_result == "PASS" ? "#71c788" : "#db8181";
         };
+
+        function setColor2(test_result){
+            if (test_result=="men"){
+                return "#db8181"
+            } else if (test_result == "nowomen") {
+                return "#631c1c"
+            } else if (test_result == "notalk") {
+                return "#b23333"
+            } else if (test_result == "dubious") {
+                return "#db8181"
+            } else {
+                return "#71c788"
+            }
+        }
 
         var tooltip = d3.select("body").append("div")
             .attr("class", "tooltip")

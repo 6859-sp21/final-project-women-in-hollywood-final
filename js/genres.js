@@ -1,6 +1,6 @@
 var fullHeightGenre = 200;
 var fullWidthGenre = 400;
-var marginGenre = { top: 30, bottom: 30, left: 30, right: 30 }
+var marginGenre = { top: 30, bottom: 30, left: 35, right: 30 }
 var heightGenre = fullHeightGenre - marginGenre.top - marginGenre.bottom
 var widthGenre = fullWidthGenre - marginGenre.left - marginGenre.right
 
@@ -9,6 +9,9 @@ yScaleGenre = d3.scaleLinear().domain([0, 1]).range([heightGenre, 0])
 
 var yAxisGenre = d3.axisLeft()
     .scale(yScaleGenre)
+    .tickFormat(function(d) {
+        return d*100 + "%"
+    })
 
 var xAxisGrid = d3.axisTop()
     .scale(xScaleGenre)

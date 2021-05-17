@@ -27,10 +27,12 @@ var x = d3.scaleLinear()		// y = d3.scaleLinear()
 .rangeRound([0, width]);	// .rangeRound([height, 0]);
 
 var z = d3.scaleOrdinal()
-.range(["#99382b", "#ba6f65", "#db8181"]);
+// .range(["#99382b", "#ba6f65", "#db8181"]);
+    .range(["#631c1c", "#b23333", "#db8181"])
 
 var z_good = d3.scaleOrdinal()
-.range([  "#71c788","#db8181", "#ba6f65", "#99382b"]);
+// .range([  "#71c788","#db8181", "#ba6f65", "#99382b"]);
+    .range(["#71c788", "#db8181", "#b23333", "#631c1c"]);
 
 let all_movies_data;
 d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-hollywood-final/main/data/all_movies.json", d3.autotype).then(
