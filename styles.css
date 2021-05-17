@@ -320,6 +320,7 @@ path.line{
 #highest_gross_chart {
     width: 800px;
     height: 600px;
+    margin-left: -60;
 }
 
 .stacked_bars_svg {
@@ -382,7 +383,7 @@ h1 {
 }
 
 .sec4 {
-  background: gray;
+  background: black;
 }
 
 .correct {

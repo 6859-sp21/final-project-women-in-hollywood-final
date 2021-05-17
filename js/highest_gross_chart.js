@@ -1,12 +1,12 @@
 // stacked bar chart for highest grossing movies
-var width = 700;
+var width = 800;
 var height = 600;
 
 var stacked_bars_legend_svg = d3.select("#highest_gross_chart_legend").append("svg")
     .attr("width", 800)
     .attr("height", 100)
 var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
-    .attr("width", 800)
+    .attr("width", 900)
     .attr("height", height)
     .classed('stacked_bars_svg', true);
 var highest_grossing_movies = d3.select(".movie_list")
@@ -61,7 +61,6 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .forEach(movie => {
                 // console.log(movie)
                 var bechdel_movie = get_movie(movie.film_title);
-            // console.log(bechdel_movie, "movie results");
                 if (bechdel_movie && bechdel_movie.rating=='0'){
                     num_passed_0 ++;
                 } 
@@ -192,21 +191,35 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             });
         
         const movie_list_g = g.append("g")
-            .attr("class", "movie_list")
+            .attr("class", "top_ten_list")
             .attr("transform", "translate(200,0)");
                 
+        movie_list_g.append("text")
+            .text("Top Ten Grossing Movies In Year")
+            .attr("x", 400)
+            .attr("y", 10)
+            .attr("fill", "white")
+            .style("font-size", "12px")        
+        movie_list_g.append("text")
+            .text("Titles in green are movies that passed!")
+            .attr("x", 400)
+            .attr("y", 30)
+            .attr("fill", "white")
+            .style("font-size", "10px")                  
+
         target_movies=[]
         function show_movies(data) {
             if (data.target.__data__.data.movies != target_movies) {
                 target_movies = data.target.__data__.data.movies;
                 // console.log(target_movies)
-                movie_list_g.selectAll('*').remove();
+                movie_list_g.selectAll('.movie_list').remove();
                 target_movies.forEach((movie, i)=>{
                     // console.log(movie.rating);
                     movie_list_g.append("text")
                         .text(movie.title)
-                        .attr("x", 300)
-                        .attr("y", 10+20*i)
+                        .attr("class", "movie_list")
+                        .attr("x", 400)
+                        .attr("y", 50+20*i)
                         .attr("fill", movie.rating ? z_good(movie.rating): z_good(0))
                         .style("font-size", "10px")
                 })

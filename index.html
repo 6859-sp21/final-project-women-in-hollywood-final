@@ -17,28 +17,51 @@
         <!-- no matter how jank...if it works it works -->
       </div>
     </section>
+    <section class = "sec3">
+        
+      <h2 style="padding-top: 50px;">Did your favorite movies pass the Bechdel Test?</h2>
+      <p>Search for it to find out.</p>
+      <div class="search-input">
+        <input type="text" placeholder="Type to search..">
+        <div class="autocom-box">
+          <!-- here list are inserted from javascript -->
+        </div>
+        <div class="movie_result hidden"></div>
+      </div>
+    </section>
+
+
+    <section class="sec3">
+      <div class = "col">
+        <h2>How do we evaluate<br>the representation of women in movies?</h2>
+    
+        <div style="padding-top: 50px;">
+          <h3>To do this, we use something called the <strong><u>Bechdel Test</u></strong>.</h3>
+          <p>The Bechdel Test, or Bechdel-Wallace Test, sometimes called the Bechdel Rule is a simple test which names the following three criteria: 
+            <ul>
+              <li><b>(1)</b> it has to have at least two women in it, </li>
+              <li><b>(2)</b> who talk to each other, about </li>
+              <li><b>(3)</b> something besides a man.</li>
+            </ul>
+          </p>
+        </div>
+      
+      </div>
+    </section>
+
+    <section class='sec2'>
+      <h1>How well do you know Hollywood?</h1>
+      <p>Take a guess at if these highly grossing movies passed the test.</p>
+      <div id="game" class="game">
+      <h2>Score: <b><span id="gameScore">0</span></b>/10</h2>
+    </section>
+
+    
 
     <section class="sec2">
-      <div class="two-col">
-        <div class = "col">
-          <h2>How do we evaluate<br>the representation of women in movies?</h2>
-      
-          <div style="padding-top: 50px;">
-            <h3>To do this, we use something called the <strong><u>Bechdel Test</u></strong>.</h3>
-            <p>The Bechdel Test, or Bechdel-Wallace Test, sometimes called the Bechdel Rule is a simple test which names the following three criteria: 
-              <ul>
-                <li><b>(1)</b> it has to have at least two women in it, </li>
-                <li><b>(2)</b> who talk to each other, about </li>
-                <li><b>(3)</b> something besides a man.</li>
-              </ul>
-            </p>
-          </div>
-        
-        </div>
-        <div class = "col">
-           
-        <h2 style="padding-top: 20px;">Highest Grossing Movies (Past 20 Years)</h2>
-        <small>The number of movies that passed the Bechdel Test in the top ten grossing movies per year.</small>
+     
+        <h2 style="padding-top: 20px;">Movies Failing The Bechdel Test (Past 20 Years)</h2>
+        <small>The number of movies that failed the Bechdel Test in the top ten grossing movies per year.</small>
         
         <div id="highest_gross_chart_legend">
             <!-- This is where we will put our chart legend. -->
@@ -52,23 +75,9 @@
             </div>
         </div>
         <p style="padding-top: 20px;">In 2019, only half of the top ten blockbusters passed the Bechdel Test.</p>
-
-        </div>
-      </div>
       
     </section>
-    <section class = "sec3">
-        
-          <h2 style="padding-top: 50px;">Did your favorite movies pass the Bechdel Test?</h2>
-          <p>Search for it to find out.</p>
-          <div class="search-input">
-            <input type="text" placeholder="Type to search..">
-            <div class="autocom-box">
-              <!-- here list are inserted from javascript -->
-            </div>
-            <div class="movie_result hidden"></div>
-          </div>
-    </section>
+    
 
     <section class="sec4">
       <h2>Perhaps genres will tell us a different story?</h2>
@@ -102,11 +111,6 @@
       </div>
     </section>
 
-    <section class='sec2'>
-      <h1>GAME</h1>
-      <div id="game" class="game">
-      <h2>Score: <b><span id="gameScore">0</span></b>/10</h2>
-    </section>
 
     <div>Data Sources: 
         <a href="https://github.com/fivethirtyeight/data/tree/master/bechdel">FiveThirtyEight</a>
