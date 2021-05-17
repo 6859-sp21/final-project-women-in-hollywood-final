@@ -10,6 +10,12 @@ yScaleGenre = d3.scaleLinear().domain([0, 1]).range([heightGenre, 0])
 var yAxisGenre = d3.axisLeft()
     .scale(yScaleGenre)
 
+var xAxisGrid = d3.axisTop()
+    .scale(xScaleGenre)
+    .tickSize(heightGenre)
+    .tickFormat('')
+    .tickValues(d3.range(1980, 2011, 10))
+
 var area = d3.area()
     .x(function (d) {
         return xScaleGenre(d.year)
@@ -80,6 +86,14 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holly
             .attr("class", function (d) {
                 return d.genre + "-line"
             });
+        
+
+        svg.append('g')
+            .attr('class', 'x-axis-grid')
+            .attr('transform', 'translate(0,' + (heightGenre) + ")")
+            .style("stroke", "rgba(0,0,0,.1)")
+            .style("stroke-width", "1px")
+            .call(xAxisGrid)
 
         svg.append("text")
             .attr("class", "label")
@@ -115,15 +129,15 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holly
             .attr("dy", 4);
 
         svg.append("text")
-            .attr("x", 0)
-            .attr("y", heightGenre + marginGenre.bottom / 2)
+            .attr("x", -20)
+            .attr("y", heightGenre + marginGenre.bottom / 2 + 5)
             .attr("class", "static_year")
             .style("text-anchor", "start")
             .text(function (d) { return d[0].year });
 
         svg.append("text")
-            .attr("x", widthGenre)
-            .attr("y", heightGenre + marginGenre.bottom / 2)
+            .attr("x", widthGenre + 20)
+            .attr("y", heightGenre + marginGenre.bottom / 2 + 5)
             .attr("class", "static_year")
             .style("text-anchor", "end")
             .text(function (d) { return d[d.length - 1].year });

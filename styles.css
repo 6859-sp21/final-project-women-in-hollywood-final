@@ -395,3 +395,12 @@ h1 {
   stroke: #db8181;
   stroke-width: 5;
 }
+
+.x-axis-grid > g > line {
+  stroke: rgba(255,255,255,0.5);
+  stroke-width: 1px;
+}
+
+.x-axis-grid > path {
+  stroke: none;
+}
