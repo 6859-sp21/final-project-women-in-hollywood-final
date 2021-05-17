@@ -1,30 +1,30 @@
 // stacked bar chart for highest grossing movies
-var width = 800;
-var height = 600;
+var widthHigh = 800;
+var heightHigh = 600;
 
 var stacked_bars_legend_svg = d3.select("#highest_gross_chart_legend").append("svg")
     .attr("width", 800)
     .attr("height", 100)
 var stacked_bars_svg = d3.select("#highest_gross_chart").append("svg")
     .attr("width", 900)
-    .attr("height", height)
+    .attr("height", heightHigh)
     .classed('stacked_bars_svg', true);
 var highest_grossing_movies = d3.select(".movie_list")
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
 
 g = stacked_bars_svg.append("g")
-.attr("width", width)
+.attr("width", widthHigh)
 .attr("height", "100%")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
 var y = d3.scaleBand()			// x = d3.scaleBand()	
-.rangeRound([0, 500])	// .rangeRound([0, width])
+.rangeRound([0, 500])	// .rangeRound([0, widthHigh])
 .paddingInner(0.15)
 .align(0.1);
 
 var x = d3.scaleLinear()		// y = d3.scaleLinear()
-.rangeRound([0, width]);	// .rangeRound([height, 0]);
+.rangeRound([0, widthHigh]);	// .rangeRound([heightHigh, 0]);
 
 var z = d3.scaleOrdinal()
 // .range(["#99382b", "#ba6f65", "#db8181"]);
@@ -150,7 +150,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
 
         g.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0,"+(height-100)+")")				
+            .attr("transform", "translate(0,"+(heightHigh-100)+")")				
             .call(d3.axisBottom(x).ticks(null, "s"))				
         .append("text")
             .attr("y", 2)											
@@ -160,7 +160,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .attr("font-weight", "bold")
             .attr("text-anchor", "start")
             .text("Year")
-            .attr("transform", "translate("+ (-width) +",-10)"); 
+            .attr("transform", "translate("+ (-widthHigh) +",-10)"); 
 
         var legend = stacked_bars_legend_svg.append("g")
             .attr("font-family", "sans-serif")
@@ -172,13 +172,13 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .attr("transform", function(d, i) { return "translate(-450, " + (i * 20) + ")"; });
 
         legend.append("rect")
-            .attr("x", width - 19)
+            .attr("x", widthHigh - 19)
             .attr("width", 19)
             .attr("height", 19)
             .attr("fill", z);
 
         legend.append("text")
-            .attr("x", width + 5)
+            .attr("x", widthHigh + 5)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
             .classed("text", true)
