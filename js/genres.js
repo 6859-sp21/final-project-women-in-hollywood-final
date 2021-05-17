@@ -16,6 +16,12 @@ var xAxisGrid = d3.axisTop()
     .tickFormat('')
     .tickValues(d3.range(1980, 2011, 10))
 
+var yAxisGrid = d3.axisRight()
+    .scale(yScaleGenre)
+    .tickSize(widthGenre)
+    .tickFormat('')
+    .tickValues([.25, .5, .75])
+
 var area = d3.area()
     .x(function (d) {
         return xScaleGenre(d.year)
@@ -91,9 +97,12 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holly
         svg.append('g')
             .attr('class', 'x-axis-grid')
             .attr('transform', 'translate(0,' + (heightGenre) + ")")
-            .style("stroke", "rgba(0,0,0,.1)")
-            .style("stroke-width", "1px")
             .call(xAxisGrid)
+        
+        svg.append('g')
+            .attr('class', 'x-axis-grid')
+            // .attr('transform', 'translate(0,' + (heightGenre) + ")")
+            .call(yAxisGrid)
 
         svg.append("text")
             .attr("class", "label")
