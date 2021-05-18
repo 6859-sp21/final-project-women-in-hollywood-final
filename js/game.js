@@ -28,6 +28,12 @@ var gameHeight = 100;
 var barHeight = 40;
 var userScore = 0;
 
+
+var summary_bars_svg = d3.select("#highest_gross_chart_legend").append("svg")
+    .attr("width", 800)
+    .attr("height", 100)
+    .classed('summary_bars_svg', true);
+
 d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/movies.csv', d3.autoType)
     .then(function (movies) {
         // pass = movies.filter(mov => (mov.domgross >= 100000000)&&(mov.binary=="PASS"));
@@ -75,90 +81,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 document.querySelector("#gameScore").innerHTML = userScore
             }
         };
-        
-        function display_poll_results(poll_results_json) {
-            poll_g = poll_result_svg.append("g")
-                .attr("width", gameWidth)
-                .attr("height", gameHeight)
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            
-            poll_results_json.sort(function (a, b) {
-                return d3.ascending(a.name, b.name);
-            })
-            var y = d3.scaleOrdinal()
-                .range([50, 0], .1)
-                .domain(poll_results_json.map(function (d) {
-                    return d.name;
-                }));
-        
-            var x = d3.scaleLinear()	
-            .rangeRound([0, 300])
-            .domain([0, d3.max(poll_results_json, function (d) {
-                return d.value;
-            })]);
-        
-            var bars = poll_result_svg.selectAll(".bar")
-                .data(poll_results_json)
-                .enter()
-                .append("g")
-        
-            //append rects
-            bars.append("rect")
-                .attr("class", "bar")
-                .attr("y", function (d) {
-                    return y(d.name)+8;
-                })
-                .attr("height", barHeight)
-                .attr("x", 0)
-                .attr("fill",  function (d) { return setColor(d.name) })
-                .attr("width", function (d) {
-                    return 0;
-                })
-        
-            bars.selectAll("rect")
-                .transition().duration(1000)	
-                .attr("height", barHeight)
-                .attr("x", 0)
-                .attr("width", function (d) {
-                    return x(d.value);
-                })	
-        
-            bars.append("text")
-                .attr("class", "percent_label")
-                //y position of the label is halfway down the bar
-                .attr("y", function (d) {
-                    return y(d.name) + 25 + 8;
-                })
-                //x position is 3 pixels to the right of the bar
-                .attr("x", function (d) {
-                    return x(d.value) + 3;
-                })
-                .attr("fill", "white")
-                .text(function (d) {
-                    return (Math.round(d.value/pollTot *100) + "%");
-                });
-        
-            bars.append("text")
-                .attr("class", "label")
-                //y position of the label is halfway down the bar
-                .attr("y", function (d) {
-                    return y(d.name) + 24 + 8;
-                })
-                .attr("x", function (d) {
-                    return 10;
-                })
-                .attr("fill", "white")
-                .text(function (d) {
-                    return (d.name);
-                });
-        
-        }
-        
-        var poll_result_svg = d3.select("#poll_results").append("svg")
-            .attr("width", gameWidth)
-            .attr("height", gameHeight)
-            .style("display", "none")  
-            .classed('poll', true);
+
+        var game_movie_ids = [];
 
         var svg = d3.select("#game").selectAll("svg")
             .data(pop_movies)
@@ -166,17 +90,22 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
             .append("svg")
             .attr("class", "game")
             .attr("width", fullWidthGenre)
-            .attr("height", fullHeightGenre)
+            .attr("height", 140)
             .append("g")
             .attr("transform", "translate(" + marginGenre.left + "," + marginGenre.right + ")")
             .each(multiple)
 
         function multiple(model){
+            d3.select(".dots").append("div")
+                .attr("class", "dot dot"+game_movie_ids.length);
+                    
             d3.select(this.parentNode)
                 .attr("class", function (d) {
-                    return d.imdb + "_game"
+                    game_movie_ids.push(d.imdb);
+                    return d.imdb + "_game game_movie fade"
                 });
-
+            
+            
             var svg = d3.select(this)
                 .append("g")
                 .attr("class", function (d) {
@@ -238,6 +167,58 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .style("fill", "white")
                 .text(function (d) { return d.title; });
         }
+
+        d3.select("#game_buttons").append("div")
+            .attr("class", "prev")
+            .text("Previous")
+            .style("fill", "white")
+            .on("click", prevSlide);
         
+        d3.select("#game_buttons").append("div")
+            .attr("class", "next")
+            .text("Next")
+            .on("click", nextSlide)
+            .style("fill", "white");
+
+    
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function nextSlide() {
+            showSlides(slideIndex += 1);
+        }
+
+        function prevSlide() {
+            showSlides(slideIndex -= 1);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = game_movie_ids;
+            // console.log(slides);
+            if (n >= slides.length) {
+                slideIndex = slides.length;
+                d3.select(".next").style("display", "none");
+                
+            } else {
+                d3.select(".next").style("display", "flex");
+                
+            }
+            if (n <= 1) {
+                slideIndex = 1;
+                d3.select(".prev").style("display", "none");
+                
+            } else {
+                d3.select(".prev").style("display", "flex");
+                
+            }
+            for (i = 0; i < slides.length; i++) {
+                d3.select("."+slides[i]+"_game").style("display", "none");
+                d3.select(".dot"+i).classed("active", false);
+            }
+            d3.select("."+game_movie_ids[slideIndex-1]+"_game").style("display", "block");
+            d3.select(".dot"+(slideIndex-1)).classed("active", "true");
+        }
     })
 
