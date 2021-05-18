@@ -133,13 +133,19 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
                 return 0; })	
             .attr("height", y.bandwidth())	
         
-        stacked_bars_svg.selectAll("rect")
-            .transition().duration(1000)	
-            .attr("x", function(d) { 
-                return x(d[0]); })			    
-            .attr("width", function(d) { 
-                return x(d[1])-x(d[0]); })	
-            .attr("height", y.bandwidth())	
+        stacked_bars_svg.on('mouseover', animateStackedBars);	
+
+        function animateStackedBars(){
+            stacked_bars_svg.selectAll("rect")
+                .transition().duration(1000)	
+                .attr("x", function(d) { 
+                    return x(d[0]); })			    
+                .attr("width", function(d) { 
+                    return x(d[1])-x(d[0]); })	
+                .attr("height", y.bandwidth())	
+           
+        }
+
             
         stacked_bars_svg.selectAll("rect").on('mouseover', show_movies)	
 
@@ -169,7 +175,7 @@ d3.json("https://raw.githubusercontent.com/6859-sp21/final-project-women-in-holl
             .selectAll("g")
             .data(keys.reverse().slice(1,))
             .enter().append("g")
-            .attr("transform", function(d, i) { return "translate(-450, " + (i * 20) + ")"; });
+            .attr("transform", function(d, i) { return "translate(-450, " + (i * 20+20) + ")"; });
 
         legend.append("rect")
             .attr("x", widthHigh - 19)
