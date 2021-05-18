@@ -365,7 +365,7 @@ section {
 }
 
 .sec1 {
-  padding: 20vh 0 40vh 0;
+  padding: 20vh 0 30vh 0;
   background: black;
 }
 
@@ -375,15 +375,12 @@ h1 {
 
 .sec2 {
   background: black;
-  padding: 20vh 0 75vh 0;
+  padding: 20vh 0 35vh 0;
 }
 
-.sec3 {
+.sec3, .sec4, .sec5, .sec6 {
   background: black;
-}
-
-.sec4 {
-  background: black;
+  padding: 20vh 0 30vh 0;
 }
 
 .correct {
@@ -469,4 +466,11 @@ article {
 
 .active, .dot:hover {
   background-color: white;
+}
+
+
+.content {
+  width:80%;
+  text-align: center;
+  margin: auto;
 }
