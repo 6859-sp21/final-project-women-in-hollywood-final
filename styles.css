@@ -474,3 +474,10 @@ article {
   text-align: center;
   margin: auto;
 }
+
+#game_buttons .next, #game_buttons .prev {
+  border: white 1px solid;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
