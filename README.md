@@ -7,4 +7,6 @@ Link to video: https://www.youtube.com/watch?v=71PM0bM5ACg
 
 Link to paper: 
 
+Abstract: 
+
 ![Women in Hollywood Image](abstract.PNG)
