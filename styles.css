@@ -411,8 +411,10 @@ h1 {
 }
 
 article {
-  column-count: 2;
-  column-width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* FOR THE GAME */
