@@ -89,16 +89,16 @@ const latestYear = 2013;
 
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 10, bottom: 40, left: 40 },
-    width = 600,
-    height = 400;
+    width = 400,
+    height = 300;
 
 
 // for the bubble chart
-var bubble_chart_width = 400,
-    bubble_chart_height = 500;
+var bubble_chart_width = 500,
+    bubble_chart_height = 400;
 
-var bubble_legend_width = 300,
-    bubble_legend_height = 500;
+var bubble_legend_width = 500,
+    bubble_legend_height = 100;
 
 var w = bubble_chart_width, h = bubble_chart_height;
 
@@ -462,7 +462,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .attr('dy', '.3em')
                 .attr("class", function (d) { return "bubbles " + d.binary })
                 .style('text-anchor', 'middle')
-                .style('font-size', function (d) { return d.r >= 25 ? 10 : 0 })
+                .style('font-size', function (d) { return d.r >= 25 ? 8 : 0 })
                 .text(d => {
                     let width = d.r * 2;
                     if (width > 50) {
@@ -474,10 +474,6 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .attr("fill", "white")
 
             function ticked() {
-                // for (let i = 0; i < 5; i++) {
-                //   simulation.tick();
-                // }
-                // console.log("tick");
                 simulation.alphaTarget(1).restart();
                 bubbles
                     .attr('cx', d => d.x)
@@ -546,7 +542,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 bubble_legend_svg.selectAll(".circle_legend_title").remove()
                 bubble_legend_svg.append("text")
                     .attr('x', xCircle)
-                    .attr("y", height - 100 + 30)
+                    .attr("y", 10)
                     .text(legend_title)
                     .attr("class", "circle_legend_title")
                     .attr("text-anchor", "middle")
@@ -594,7 +590,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .append("circle")
                 .classed("circleMaking", true)
                 .attr("cx", xCircle)
-                .attr("cy", function (d) { return height - 100 - setScale(d) })
+                .attr("cy", function (d) { return height - setScale(d) })
                 .attr("r", function (d) { return setScale(d) })
                 .style("fill", "none")
                 .attr("stroke", "white")
@@ -608,9 +604,9 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .classed("circleMaking", true)
                 .attr('x1', function (d) { return xCircle + setScale(d) })
                 .attr('x2', xLabel)
-                .attr('y1', function (d) { return height - 100 - setScale(d) })
-                .attr('y2', function (d) { return height - 100 - setScale(d) })
-                .attr('stroke', 'black')
+                .attr('y1', function (d) { return height - setScale(d) })
+                .attr('y2', function (d) { return height - setScale(d) })
+                .attr('stroke', 'white')
                 .style('stroke-dasharray', ('2,2'))
 
             // Add legend: labels
@@ -632,7 +628,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         // Legend title
         bubble_legend_svg.append("text")
             .attr('x', xCircle)
-            .attr("y", height - 100 + 30)
+            .attr("y", 10)
             .attr("class", "circle_legend_title")
             .text("International Gross (M)")
             .attr("text-anchor", "middle")
@@ -646,7 +642,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
             .enter()
             .append("circle")
             .attr("cx", 120)
-            .attr("cy", function (d, i) { return 120 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("cy", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) 
             .attr("r", 7)
             .style("fill", function (d) {
                 return setColor(d);
@@ -665,7 +661,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 const percentPassedLabel = bubble_legend_svg.append('text')
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
-                    .attr('y', margin.top + 30)
+                    .attr('y', 30)
                     .attr('fill', 'white')
                     .attr('font-family', 'Helvetica Neue, Arial')
                     .attr('font-weight', 500)
@@ -678,7 +674,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 const percentPassedYearLabel = bubble_legend_svg.append('text')
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
-                    .attr('y', margin.top + 60)
+                    .attr('y', 60)
                     .attr('font-family', 'Helvetica Neue, Arial')
                     // .attr('font-weight', 500)
                     .attr('font-size', 12)
@@ -700,7 +696,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .append("text")
                 .classed("PFLabel", true)
                 .attr("x", 120 + size * .8)
-                .attr("y", function (d, i) { return 110 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) })
                 .style("fill", function (d) { return setColor(d) })
                 .text(function (d, i) {
                     if (allgroupsCount[i] != "") {
