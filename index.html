@@ -44,11 +44,17 @@
     <section class='sec3'>
       <h1>How well do you know Hollywood?</h1>
       <p>Take a short quiz of ten randomly generated movies and guess if these highly grossing movies passed the Bechdel test.</p>
-      <div id="game" class="game">
+      <div id="game" class="game" style="padding-top: 20px;">
       </div>
       <div id="game_buttons"> <!-- Next and previous buttons --></div>
       <div class="dots"></div>
       <h2>Score: <b><span id="gameScore">0</span></b>/10</h2>
+
+      <div id="gameChartDiv" style="display: none; padding-top: 20px;">
+        <h2 style="padding-bottom: 20px;">How did you do when compared to others?</h2>
+        <div id="gameChart"></div>
+        <p style="padding: 50px 0 0 0">It is noteworthy how false positives (guessing a movie passed the Bechdel test when it had failed) <br><b>outnumber</b> false negatives (guessing a movie failed the Bechdel test when it passed)</p>
+      </div>
     </section>    
 
     <section class="sec4">
