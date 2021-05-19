@@ -489,3 +489,7 @@ article {
   margin-bottom: 20px;
   border-radius: 3px;
 }
+
+a {
+  color: steelblue;
+}
