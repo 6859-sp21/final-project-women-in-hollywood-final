@@ -29,11 +29,6 @@ var userAnswered = 0;
 var userFalsePos = 0;
 var userFalseNeg = 0;
 
-var summary_bars_svg = d3.select("#highest_gross_chart_legend").append("svg")
-    .attr("width", 800)
-    .attr("height", 100)
-    .classed('summary_bars_svg', true);
-
 d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/movies.csv', d3.autoType)
     .then(updateVals())
     .then(function (movies) {

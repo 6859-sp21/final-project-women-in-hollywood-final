@@ -23,6 +23,9 @@ h2 {
     justify-content: center;
 }
 
+.art1 {
+  max-width: min-content;
+}
 .col {
   margin:12px;
 }
@@ -35,11 +38,14 @@ h2 {
 .button_group {
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content: center;
+    margin-top: 12px;
 }
 
 .legend_button {
     padding: 5 10;
+    margin-left: 4px;
+    margin-right: 4px;
     border-radius: 5px;
     background-color: darkblue;
     color: white;
@@ -64,7 +70,9 @@ h2 {
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-end;
+    margin-bottom: 12px;
 }
+
 .tooltip { 
     position: absolute;
     text-align: center;

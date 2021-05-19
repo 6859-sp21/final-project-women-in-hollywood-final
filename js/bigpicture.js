@@ -89,16 +89,16 @@ const latestYear = 2013;
 
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 10, bottom: 40, left: 40 },
-    width = 400,
-    height = 300;
+    width = 500,
+    height = 400;
 
 
 // for the bubble chart
-var bubble_chart_width = 500,
-    bubble_chart_height = 400;
+var bubble_chart_width = 600,
+    bubble_chart_height = 500;
 
 var bubble_legend_width = 500,
-    bubble_legend_height = 100;
+    bubble_legend_height = 120;
 
 var w = bubble_chart_width, h = bubble_chart_height;
 
@@ -257,7 +257,16 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                     .attr("y", (h / 2))
                     .attr("text-anchor", "middle")
                     .style("font-size", "24px")
-                    .text("Click and drag the line chart to select years to explore")
+                    .text("Click and drag the line chart")
+                    .attr("fill", "white");
+
+                bubble_chart_svg.append("text")
+                    .classed("bubbleDirections", true)
+                    .attr("x", (w / 2))
+                    .attr("y", (h / 2)+30)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "24px")
+                    .text("to select years to explore")
                     .attr("fill", "white");
                     
             }
@@ -282,14 +291,14 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 const yearLabel = svg.append('text')
                     .attr("class", "yearLabel")
                     .attr('x', 70)
-                    .attr('y', margin.top + 70)
+                    .attr('y', 70)
                     .attr('fill', 'SteelBlue')
                     .attr('font-family', 'Helvetica Neue, Arial')
                     .attr('font-weight', 500)
-                    .attr('font-size', 80)
+                    .attr('font-size', 48)
                     .text(yearText);
 
-                document.getElementById("bubbleYear").innerHTML = yearText
+                // document.getElementById("bubbleYear").innerHTML = yearText
             }
         }
 
@@ -383,8 +392,13 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         function dataJoinBubble(brushedData = []) {
             // console.log(radius_var, "radius_var");
             bubble_chart_svg.selectAll('*').remove();
+            if(brushedData.length>100) {
+                manySelected=true;
+            } else {
+                manySelected=false;
+            }
             brushedData.forEach(function (movie) {
-                movie.r = setScale(movie[radius_var]);
+                movie.r = setScale(movie[radius_var], manySelected);
                 movie.x = w / 2;
                 movie.y = h / 2;
                 var txt = document.createElement("textarea");
@@ -404,10 +418,9 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .attr('r', d => d.r)
                 .attr('fill', d => setColor2(d.clean_test))
                 .attr("class", function (d) { return "bubbles " + d.binary })
-                .attr("cx", function (d, i) { return 175 + 25 * i + 2 * i ** 2; })
+                .attr("cx", function (d, i) { return 175 + 5 * i + 2 * i ** 2; })
                 .attr("cy", function (d, i) { return 250; })
-                // .style("stroke", function(d, i){ return setColor(d.binary) })
-                .style("stroke-width", 1)
+                // .style("stroke-width", 1)
                 .style("pointer-events", "all")
                 .call(d3.drag()
                     .on("start", dragstarted)
@@ -491,14 +504,27 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
 
         }
 
-        function setScale(value) {
-            if (radius_var == 'intgross') {
-                return Math.sqrt(value * 0.00001 / Math.PI / 2)
-            } else if (radius_var == 'domgross') {
-                return Math.sqrt(value * 0.000015 / Math.PI / 2)
-            } else if (radius_var == 'budget') {
-                return Math.sqrt(value * 0.00002 / Math.PI / 2)
+        var manySelected=false;
+
+        function setScale(value, manySelected) {
+            if (manySelected){
+                if (radius_var == 'intgross') {
+                    return Math.sqrt(value * 0.000005 / Math.PI / 2)
+                } else if (radius_var == 'domgross') {
+                    return Math.sqrt(value * 0.0000055 / Math.PI / 2)
+                } else if (radius_var == 'budget') {
+                    return Math.sqrt(value * 0.000007 / Math.PI / 2)
+                }
+            } else {
+                if (radius_var == 'intgross') {
+                    return Math.sqrt(value * 0.00001 / Math.PI / 2)
+                } else if (radius_var == 'domgross') {
+                    return Math.sqrt(value * 0.000015 / Math.PI / 2)
+                } else if (radius_var == 'budget') {
+                    return Math.sqrt(value * 0.00002 / Math.PI / 2)
+                }
             }
+           
         }
 
         // Add a scale for bubble color
@@ -529,20 +555,30 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
             if (d.target.name != radius_var) {
                 let legend_title;
                 if (d.target.name == "intgross") {
+                    d3.select(".intgross").style("opacity", "1");
+                    d3.select(".domgross").style("opacity", ".5");
+                    d3.select(".budget").style("opacity", ".5");
+                    
                     legend_title = "International Gross (M)";
                     valuesToShow = [10000000, 100000000, 500000000, 1000000000]
+
                 } else if (d.target.name == "domgross") {
-                    legend_title = "Domestic Gross (M)";
+                    d3.select(".intgross").style("opacity", ".5");
+                    d3.select(".domgross").style("opacity", "1");
+                    d3.select(".budget").style("opacity", ".5");legend_title = "Domestic Gross (M)";
                     valuesToShow = [10000000, 100000000, 500000000]
                 } else {
+                    d3.select(".intgross").style("opacity", ".5");
+                    d3.select(".domgross").style("opacity", ".5");
+                    d3.select(".budget").style("opacity", "1");
                     legend_title = "Budget (M)";
                     valuesToShow = [10000000, 100000000, 500000000]
                 }
                 radius_var = d.target.name;
                 bubble_legend_svg.selectAll(".circle_legend_title").remove()
                 bubble_legend_svg.append("text")
-                    .attr('x', xCircle)
-                    .attr("y", 10)
+                    .attr('x', 350)
+                    .attr("y", 20)
                     .text(legend_title)
                     .attr("class", "circle_legend_title")
                     .attr("text-anchor", "middle")
@@ -557,21 +593,22 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         d3.select(".button_group")
             .append("button")
             .attr('name', 'domgross')
-            .attr('class', 'legend_button')
+            .attr('class', 'legend_button domgross')
             .attr("fill", "white")
             .text("Domestic Gross")
             .on("click", updateLegendAndChart);
         d3.select(".button_group")
             .append("button")
             .attr('name', 'intgross')
-            .attr('class', 'legend_button')
+            .style("opacity", "1")
+            .attr('class', 'legend_button intgross')
             .attr("fill", "white")
             .text("International Gross")
             .on("click", updateLegendAndChart);
         d3.select(".button_group")
             .append("button")
             .attr('name', 'budget')
-            .attr('class', 'legend_button')
+            .attr('class', 'legend_button budget')
             .attr("fill", "white")
             .text("Budget")
             .on("click", updateLegendAndChart);
@@ -579,8 +616,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
 
 
         var valuesToShow = [10000000, 100000000, 1000000000]
-        var xCircle = 120
-        var xLabel = 240
+        var xCircle = 300
+        var xLabel = 440
         function legendMaking() {
             bubble_legend_svg.selectAll(".circleMaking").remove()
             bubble_legend_svg
@@ -590,7 +627,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .append("circle")
                 .classed("circleMaking", true)
                 .attr("cx", xCircle)
-                .attr("cy", function (d) { return height - setScale(d) })
+                .attr("cy", function (d) { return bubble_legend_height - setScale(d) })
                 .attr("r", function (d) { return setScale(d) })
                 .style("fill", "none")
                 .attr("stroke", "white")
@@ -604,8 +641,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .classed("circleMaking", true)
                 .attr('x1', function (d) { return xCircle + setScale(d) })
                 .attr('x2', xLabel)
-                .attr('y1', function (d) { return height - setScale(d) })
-                .attr('y2', function (d) { return height - setScale(d) })
+                .attr('y1', function (d) { return bubble_legend_height - setScale(d) })
+                .attr('y2', function (d) { return bubble_legend_height - setScale(d) })
                 .attr('stroke', 'white')
                 .style('stroke-dasharray', ('2,2'))
 
@@ -617,7 +654,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 .append("text")
                 .classed("circleMaking", true)
                 .attr('x', xLabel)
-                .attr('y', function (d) { return height - 100 - setScale(d) })
+                .attr('y', function (d) { return bubble_legend_height - setScale(d) })
                 .attr("fill", "white")
                 .text(function (d) { return d / 1000000 })
                 .style("font-size", 10)
@@ -627,8 +664,8 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
 
         // Legend title
         bubble_legend_svg.append("text")
-            .attr('x', xCircle)
-            .attr("y", 10)
+            .attr('x', 350)
+            .attr("y", function (d) { return 20})
             .attr("class", "circle_legend_title")
             .text("International Gross (M)")
             .attr("text-anchor", "middle")
@@ -658,7 +695,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                 } else {
                     yearText = "of movies in " + early + " passed"
                 }
-                const percentPassedLabel = bubble_legend_svg.append('text')
+                const percentPassedLabel = d3.select("#bubbleYear").append('text')
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
                     .attr('y', 30)
@@ -671,7 +708,7 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
                     .attr("text-anchor", "middle")
                     .text(passed + "%");
 
-                const percentPassedYearLabel = bubble_legend_svg.append('text')
+                const percentPassedYearLabel =  d3.select("#bubbleYear").append('text')
                     .attr("class", "percentPassed")
                     .attr('x', "50%")
                     .attr('y', 60)
@@ -712,13 +749,23 @@ d3.csv('https://raw.githubusercontent.com/fivethirtyeight/data/master/bechdel/mo
         }
         bubbleLegendCount()
         bubble_legend_svg.append("text")
-            .attr("x", "50%")
-            .attr("y", 180)
+            .attr("x", "150")
+            .attr("y", 80)
             .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
             .classed("legend_caption", true)
             .style("alignment-baseline", "middle")
-            .text("Hover on PASS or FAIL to highlight bubbles")
+            .text("Hover on PASS or FAIL")
+            .attr("fill", "gray")
+
+        bubble_legend_svg.append("text")
+            .attr("x", "150")
+            .attr("y", 100)
+            .attr("dominant-baseline", "middle")
+            .attr("text-anchor", "middle")
+            .classed("legend_caption", true)
+            .style("alignment-baseline", "middle")
+            .text("to highlight just those bubbles")
             .attr("fill", "gray")
 
 
