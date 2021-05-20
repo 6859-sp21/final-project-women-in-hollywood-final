@@ -31,8 +31,8 @@ Jennifer worked on the following things:
 * The content of the introduction and concluding section
 
 Alvin worked on the following things:
-* Setting up a database for the poll and the mini-quiz
-* The initial structure of the miniquiz
-* The series of line charts of movies broken down by genre
-* The scrolly-telling, spaced out formatting of the visualization
-
+* Creating the database for the poll and the mini-quiz
+* The functionality of the miniquiz
+* The grouped bar graph for the results of the miniquiz
+* The small multiple area charts of movies broken down by genre
+* The scrolly-telling aesthetics, spaceing out formatting of the visualization
